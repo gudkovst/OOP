@@ -26,11 +26,11 @@ map <string, int> count_words(ifstream in){
 void print(map <string, int> dict, ofstream out){
 	double n = 0;
 	vector <pair<int, string>> res;
-	for (auto i: dict) {
-		res.push_back({ i->second, i->first });
-		n += i->second;
+	for (auto &i: dict) {
+		res.push_back({ i.second, i.first });
+		n += i.second;
 	}
 	sort(res.begin(), res.end(), comp);
-	for (auto i: res)
-		out << i->second << "," << i->first << "," << i->first / n * 100 << "%\n";
+	for (auto &i: res)
+		out << i.second << "," << i.first << "," << i.first / n * 100 << "%\n";
 }
