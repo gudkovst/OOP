@@ -23,7 +23,7 @@ map <string, int> count_words(const ifstream& in){
 	return dict;
 }
 
-void print(map <string, int>& dict, const ofstream& out){
+void print(map <string, int>& dict, ofstream& out){
 	double n = 0;
 	vector <pair<int, string>> res;
 	for (const auto& i: dict) {
