@@ -1,11 +1,12 @@
 #include <iostream>
 #include <fstream>
+#include <map>
 #include "working.h"
 
 
 int main(int argc, char** argv) {
 	using namespace std;
-	
+
 	ifstream in(argv[1]);
 	ofstream out(argv[2]);
 
@@ -18,7 +19,8 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
-	print(count_words(in), out);
+	map <string, int> dict = count_words(in);
+	print(dict, out);
 
 	in.close();
 	out.close();
