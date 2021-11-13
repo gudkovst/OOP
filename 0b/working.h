@@ -12,4 +12,4 @@
 bool comp(std::pair<int, std::string> a, std::pair<int, std::string> b);
 
 std::map <std::string, int> count_words(const std::ifstream& in);
-void print(std::map <std::string, int>& dict, const std::ofstream& out);
+void print(std::map <std::string, int>& dict, std::ofstream& out);
