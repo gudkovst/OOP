@@ -6,7 +6,7 @@ bool comp(pair<int, string> a, pair<int, string> b) {
 	return a.first > b.first;
 }
 
-map <string, int> count_words(const ifstream& in){
+map <string, int> count_words(ifstream& in){
 	map <string, int> dict;
 	while (!in.eof()) {
 		string str;
