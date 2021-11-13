@@ -6,7 +6,7 @@ bool comp(pair<int, string> a, pair<int, string> b) {
 	return a.first > b.first;
 }
 
-map <string, int> count_words(ifstream& in){
+map <string, int> count_words(ifstream& in) {
 	map <string, int> dict;
 	while (!in.eof()) {
 		string str;
@@ -23,15 +23,14 @@ map <string, int> count_words(ifstream& in){
 	return dict;
 }
 
-void print(map <string, int>& dict, ofstream& out){
+void print(map <string, int>& dict, ofstream& out) {
 	double n = 0;
 	vector <pair<int, string>> res;
-	for (const auto& i: dict) {
+	for (const auto& i : dict) {
 		res.push_back({ i.second, i.first });
 		n += i.second;
 	}
 	sort(res.begin(), res.end(), comp);
-	for (const auto& i: res)
+	for (const auto& i : res)
 		out << i.second << "," << i.first << "," << i.first / n * 100 << "%\n";
 }
-
