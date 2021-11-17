@@ -8,8 +8,8 @@ namespace TRIT{
 	Tritset::TritSet(size_t size = 0){
 		elem_size = sizeof(uint);
 		elem_capacity = 4 * elem_size;
-		int num_elem = size / elem_capacity;
-		if (size % elem_capacity)
+		size_t num_elem = size / elem_capacity;
+		if (size && size % elem_capacity)
 			num_elem++;
 		data.resize(num_elem, 0);
 	}
@@ -71,6 +71,10 @@ namespace TRIT{
 		return res;
 	}
 
+	TritPlacer TritSet::operator[](int index){
+		return TritPlacer(this, index);
+	}
+
 	TritSet operator&(const TritSet& T1,const TritSet& T2){
 		size_t len1 = T1.capacity();
 		size_t len2 = T2.capacity();
@@ -105,8 +109,8 @@ namespace TRIT{
 	}
 
 	TritPlacer::operator TritValue(){
-		int ind = index / tsp->elem_capacity;
-		int pos = index % tsp->elem_capacity;
+		size_t ind = index / tsp->elem_capacity;
+		size_t pos = index % tsp->elem_capacity;
 		uint shift = 2 * (tsp->elem_capacity - pos - 1);
 		uint mask = 3 << shift;
 		uint tv = (tsp->data[ind] & mask) >> shift;
@@ -114,6 +118,47 @@ namespace TRIT{
 		if (!tv) return Unknown;
 		if (tv == 1) return False;
 		if (tv == 3) return True;
+	}
+
+	TritPlacer::operator Trit(){
+		return Trit(static_cast<TritValue>(*this));
+	}
+
+	void TritPlacer::operator=(TritValue tv){
+		this->operator=(Trit(tv));
+	}
+
+	void TritPlacer::operator=(Trit t){
+		size_t ind = index / tsp->elem_capacity;
+		size_t pos = index % tsp->elem_capacity;
+		uint shift = 2 * (tsp->elem_capacity - pos - 1);
+		if (t == Unknown){
+			if (index < tsp->capacity()){
+				uint mask = ~(3 << shift);
+				tsp->data[ind] &= mask;
+			} return;
+		}
+		if (index >= tsp->capacity()){
+			size_t new_size = index / tsp->elem_capacity;
+			if (index % tsp->elem_capacity)
+				new_size++;
+			tsp->data.resize(new_size, 0);
+		}
+		if (t == True){
+			uint mask = 3 << shift;
+			tsp->data[ind] |= mask;
+		}
+		if (t == False){
+			uint mask = ~(3 << shift);
+			tsp->data[ind] &= mask;
+			mask = 1 << shift;
+			tsp->data[ind] |= mask;
+		}
+	}
+
+	void TritPlacer::operator=(TritPlacer tp){
+		Trit t = tp;
+		*this = t;
 	}
 
 }
