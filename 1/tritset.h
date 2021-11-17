@@ -27,6 +27,7 @@ namespace TRIT{
 			void trim(size_t lastIndex); //забыть содержимое от lastIndex и дальше
 
 			TritSet operator~(const TritSet& T);
+			TritPlacer operator[](int index);
 		
 		friend class TritPlacer;
 		friend TritSet operator&(const TritSet& T1,const TritSet& T2);
@@ -36,7 +37,7 @@ namespace TRIT{
 	TritSet operator&(const TritSet& T1,const TritSet& T2);
 	TritSet operator|(const TritSet& T1,const TritSet& T2);
 
-	class TritPlacer {//////////////FIXME!!!!
+	class TritPlacer {
 		private:
 			TritSet* tsp;
 			int index;
@@ -44,9 +45,11 @@ namespace TRIT{
 		public:
 			TritPlacer(TritSet* ptr, int ind);
 			operator TritValue();
+			operator Trit();
 
+			void operator=(TritValue tv);
+			void operator=(Trit t);
+			void operator=(TritPlacer tp);
 	};
-
-
 
 }
