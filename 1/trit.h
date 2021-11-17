@@ -5,20 +5,23 @@
 namespace TRIT {
 
 	enum Trit_value {
-		False = 0,
-		Unknown,
-		True
+		Unknown = 0, 
+		False = 1, 
+		True = 3    
 	};
 
 	class Trit {
-	public:
 		Trit_value value;
 
-		Trit(Trit_value tv);
+		public:
+			Trit(Trit_value tv);
 
-		Trit operator&(Trit t1, Trit t2);
-		Trit operator|(Trit t1, Trit t2);
-		Trit operator~(Trit t);
+			Trit operator~(const Trit& t);
 
+		friend Trit operator&(const Trit& t1,const Trit& t2);
+		friend Trit operator|(const Trit& t1,const Trit& t2);
 	};
+
+	Trit operator&(const Trit& t1,const Trit& t2);
+	Trit operator|(const Trit& t1,const Trit& t2);
 }
