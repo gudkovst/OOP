@@ -1,6 +1,5 @@
 #include <iostream>
 
-
 #include "trit.h"
 #include "tritset.h"
 
@@ -75,7 +74,7 @@ namespace TRIT{
 		return TritPlacer(this, index);
 	}
 
-	TritSet operator&(const TritSet& T1,const TritSet& T2){
+	TritSet TritSet::operator&(const TritSet& T1,const TritSet& T2){
 		size_t len1 = T1.capacity();
 		size_t len2 = T2.capacity();
 		size_t n = std::max(len1, len2);
@@ -88,7 +87,7 @@ namespace TRIT{
 		}
 		return res;
 	}
-	TritSet operator|(const TritSet& T1,const TritSet& T2){
+	TritSet TritSet::operator|(const TritSet& T1,const TritSet& T2){
 		size_t len1 = T1.capacity();
 		size_t len2 = T2.capacity();
 		size_t n = std::max(len1, len2);
