@@ -31,12 +31,12 @@ namespace TRIT {
 		TritPlacer operator[](int index);
 
 		friend class TritPlacer;
-		friend TritSet operator&(const TritSet& T1, const TritSet& T2);
-		friend TritSet operator|(const TritSet& T1, const TritSet& T2);
+		friend TritSet operator&(TritSet& T1, TritSet& T2);
+		friend TritSet operator|(TritSet& T1, TritSet& T2);
 	};
 
-	TritSet operator&(const TritSet& T1, const TritSet& T2);
-	TritSet operator|(const TritSet& T1, const TritSet& T2);
+	TritSet operator&(TritSet& T1, TritSet& T2);
+	TritSet operator|(TritSet& T1, TritSet& T2);
 
 	class TritPlacer {
 	private:
