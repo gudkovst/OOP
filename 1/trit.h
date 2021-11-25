@@ -18,7 +18,6 @@ namespace TRIT {
 
 		Trit operator~();
 		bool operator==(Trit_value tv);
-		void operator=(Trit_value tv);
 
 		friend Trit operator&(const Trit& t1, const Trit& t2);
 		friend Trit operator|(const Trit& t1, const Trit& t2);
