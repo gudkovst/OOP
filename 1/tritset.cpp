@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "trit.h"
 #include "tritset.h"
 
@@ -74,43 +72,39 @@ namespace TRIT {
 		return TritPlacer(this, index);
 	}
 
-	TritSet operator&(const TritSet& T1, const TritSet& T2) {
+	TritSet operator&(TritSet& T1, TritSet& T2) {
 		size_t len1 = T1.capacity();
 		size_t len2 = T2.capacity();
 		size_t n = std::max(len1, len2);
+		size_t k = std::min(len1, len2);
 		TritSet res(n);
-		for (int i = 0; i < n; i++) {
-			Trit t1(), t2();
-			if (i < len1) t1 = T1[i];
-			if (i < len2) t2 = T2[i];
-			res[i] = t1 & t2;
-		}
+		for (int i = 0; i < k; i++)
+			res[i] = T1[i] & T2[i];
+		if (len1 > len2)
+			for (int i = k; i < n; i++)
+				res[i] = T1[i] & Unknown;
+		else
+			for (int i = k; i < n; i++)
+				res[i] = T2[i] & Unknown;
 		return res;
 	}
+
 	TritSet operator|(TritSet& T1, TritSet& T2) {
 		size_t len1 = T1.capacity();
 		size_t len2 = T2.capacity();
 		size_t n = std::max(len1, len2);
+		size_t k = std::min(len1, len2);
 		TritSet res(n);
-		for (int i = 0; i < n; i++) {
-			Trit t1(), t2();
-			if (i < len1 && i < len2) {
-				Trit t1(T1[i]), t2(T2[i]);
-				res[i] = t1 | t2;
-			}
-			else if (i < len1) {
-				Trit t1(T1[i]);
-				Trit t2();
-				res[i] = t1 | t2;
-			}
-			else if (i < len2) {
-				Trit t1(), t2(T2[i]);
-				res[i] = t1 | t2;
-			}
-		}
+		for (int i = 0; i < k; i++)
+			res[i] = T1[i] | T2[i];
+		if (len1 > len2)
+			for (int i = k; i < n; i++)
+				res[i] = T1[i] | Unknown;
+		else
+			for (int i = k; i < n; i++)
+				res[i] = T2[i] | Unknown;
 		return res;
 	}
-
 
 	TritPlacer::TritPlacer(TritSet* ptr, int ind) {
 		tsp = ptr;
@@ -169,5 +163,4 @@ namespace TRIT {
 		Trit t = tp;
 		*this = t;
 	}
-
 }
