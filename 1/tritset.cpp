@@ -54,10 +54,10 @@ size_t TritSet::length() {
 }
 
 void TritSet::trim(size_t lastIndex) {
-	size_t k = lastIndex / elem_capacity;
-	if (lastIndex && lastIndex % elem_capacity) k++;
-	if (k < capacity())
-		data.resize(k);
+	size_t new_size = lastIndex / elem_capacity;
+	if (lastIndex && lastIndex % elem_capacity) new_size++;
+	if (new_size < capacity())
+		data.resize(new_size);
 	return;
 }
 
