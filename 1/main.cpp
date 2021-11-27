@@ -5,7 +5,7 @@
 
 int main() {
 
-	TritSet T1(20);
+	TritSet T1(10);
 	TritSet T2(25);
 
 	for (int i = 0; i < 15; i++) {
