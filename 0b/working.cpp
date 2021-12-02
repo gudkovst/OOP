@@ -9,15 +9,17 @@ bool comp(pair<int, string> a, pair<int, string> b) {
 map <string, int> count_words(ifstream& in) {
 	map <string, int> dict;
 	while (!in.eof()) {
+		cmatch word;
+		regex regular("^[a-zA-Zа-яёА-ЯЁ]+");
 		string str;
 		getline(in, str);
-		stringstream strin(str);
-		string substr;
-		while (strin >> substr) {
-			cmatch word;
-			regex regular("^[a-zA-Zа-яёА-ЯЁ]+");
-			if (regex_search(substr.c_str(), word, regular))
+		while (size(str)) {
+			if (regex_search(str.c_str(), word, regular)) {
 				dict[word.str()]++;
+				str.erase(0, size(word.str()));
+			}
+			else 
+				str.erase(0, 1);
 		}
 	}
 	return dict;
