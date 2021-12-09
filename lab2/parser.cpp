@@ -18,22 +18,21 @@ std::map<int, Worker*> Parser::getBlocks(){
 	return blocks;
 }
 
-std::vector<std::string> Parser::parseBlock(const std::string& buffer){////////////FIXME!!!
+std::vector<std::string> Parser::parseBlock(const std::string& buffer){
 	std::vector<std::string> res;
 	int i = 0;
-	for (int j = 0; j < 2; j++){
-		res[j].clear();
-		for (; buffer[i] == ' ' && i < buffer.size(); i++);
-		if (i == buffer.size())
-			throw DescriptionBlockError();
-		for (; buffer[i] != ' ' && i < buffer.size(); i++)
-			res[j][i] += buffer[i];
-		if (i == buffer.size())
-			throw DescriptionBlockError();
-	}
 	for (; buffer[i] == ' ' && i < buffer.size(); i++);
-	if (i == buffer.size())
-		throw DescriptionBlockError();
+	if (i == buffer.size()) throw DescriptionBlockError();
+	res[0].clear();
+	for (; std::isdigit(buffer[i]) && i < buffer.size(); i++)
+		res[0] += buffer[i];
+	if (i < buffer.size() - 3 && buffer[i] == ' ' && buffer[i+1] == '='
+		&& buffer[i+2] == '=') i += 3;
+	else throw DescriptionBlockError();
+	res[1].clear();
+	for (; buffer[i] != ' ' && i < buffer.size(); i++)
+		res[1] += buffer[i];
+	for (; buffer[i] == ' ' && i < buffer.size(); i++);
 	res[2] = buffer.substr(i);
 	return res;
 }
