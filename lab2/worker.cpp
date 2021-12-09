@@ -1,14 +1,14 @@
 #include "worker.h"
 
-bool Worker::isInput(){
+bool Worker::isInput() {
 	return input;
 }
 
-bool Worker::isOutput(){
+bool Worker::isOutput() {
 	return output;
 }
 
-WorkerRead::WorkerRead(const std::string& argv): Worker(){
+WorkerRead::WorkerRead(const std::string& argv) : Worker() {
 	input = false;
 	output = true;
 	int i = 0;
@@ -22,9 +22,9 @@ WorkerRead::WorkerRead(const std::string& argv): Worker(){
 		throw TooMushArgs("Read");
 }
 
-void WorkerRead::execute(std::vector<std::string>& text){
+void WorkerRead::execute(std::vector<std::string>& text) {
 	std::ifstream in(filename);
-	while (!in.eof()){
+	while (!in.eof()) {
 		std::string buf;
 		std::getline(in, buf);
 		text.push_back(buf);
@@ -32,7 +32,7 @@ void WorkerRead::execute(std::vector<std::string>& text){
 	in.close();
 }
 
-WorkerWrite::WorkerWrite(const std::string& argv): Worker(){
+WorkerWrite::WorkerWrite(const std::string& argv) : Worker() {
 	input = true;
 	output = false;
 	int i = 0;
@@ -46,15 +46,15 @@ WorkerWrite::WorkerWrite(const std::string& argv): Worker(){
 		throw TooMushArgs("Write");
 }
 
-void WorkerWrite::execute(std::vector<std::string>& text){
+void WorkerWrite::execute(std::vector<std::string>& text) {
 	std::ofstream out(filename);
-	for (auto& str: text)
+	for (auto& str : text)
 		out << str << '\n';
 	text.clear();
 	out.close();
 }
 
-WorkerGrep::WorkerGrep(const std::string& argv): Worker(){
+WorkerGrep::WorkerGrep(const std::string& argv) : Worker() {
 	input = true;
 	output = true;
 	int i = 0;
@@ -68,28 +68,28 @@ WorkerGrep::WorkerGrep(const std::string& argv): Worker(){
 		throw TooMushArgs("Grep");
 }
 
-void WorkerGrep::execute(std::vector<std::string>& text){
+void WorkerGrep::execute(std::vector<std::string>& text) {
 	std::vector<std::string> res;
 	std::regex reg(word);
 	std::smatch suit_str;
-	for (auto const& str: text)
+	for (auto const& str : text)
 		if (std::regex_search(str, suit_str, reg))
-			for (auto& word: suit_str)
+			for (auto& word : suit_str)
 				res.push_back(word);
 	text.clear();
 	text = res;
 }
 
-WorkerSort::WorkerSort(const std::string& argv){
+WorkerSort::WorkerSort(const std::string& argv) {
 	input = true;
 	output = true;
 }
 
-void WorkerSort::execute(std::vector<std::string>& text){
+void WorkerSort::execute(std::vector<std::string>& text) {
 	std::sort(text.begin(), text.end());
 }
 
-WorkerReplace::WorkerReplace(const std::string& argv){
+WorkerReplace::WorkerReplace(const std::string& argv) {
 	input = true;
 	output = true;
 	int i = 0;
@@ -109,13 +109,13 @@ WorkerReplace::WorkerReplace(const std::string& argv){
 		throw TooMushArgs("Replace");
 }
 
-void WorkerReplace::execute(std::vector<std::string>& text){
+void WorkerReplace::execute(std::vector<std::string>& text) {
 	std::regex reg(word1);
-	for (auto& str: text)
+	for (auto& str : text)
 		std::regex_replace(str, reg, word2);
 }
 
-WorkerDump::WorkerDump(const std::string& argv){
+WorkerDump::WorkerDump(const std::string& argv) {
 	input = true;
 	output = true;
 	int i = 0;
@@ -129,9 +129,9 @@ WorkerDump::WorkerDump(const std::string& argv){
 		throw TooMushArgs("Dump");
 }
 
-void WorkerDump::execute(std::vector<std::string>& text){
+void WorkerDump::execute(std::vector<std::string>& text) {
 	std::ofstream out(filename);
-	for (auto& str: text)
+	for (auto& str : text)
 		out << str << '\n';
 	out.close();
 }
