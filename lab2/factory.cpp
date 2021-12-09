@@ -1,30 +1,30 @@
 #include "factory.h"
 
 
-Worker* WorkerReadFactory::createWorker(std::string argv){
+Worker* WorkerReadFactory::createWorker(std::string argv) {
 	return new WorkerRead(argv);
 }
 
-Worker* WorkerWriteFactory::createWorker(std::string argv){
+Worker* WorkerWriteFactory::createWorker(std::string argv) {
 	return new WorkerWrite(argv);
 }
 
-Worker* WorkerGrepFactory::createWorker(std::string argv){
+Worker* WorkerGrepFactory::createWorker(std::string argv) {
 	return new WorkerGrep(argv);
 }
 
-Worker* WorkerSortFactory::createWorker(std::string argv){
+Worker* WorkerSortFactory::createWorker(std::string argv) {
 	return new WorkerSort(argv);
 }
 
-Worker* WorkerReplaceFactory::createWorker(std::string argv){
+Worker* WorkerReplaceFactory::createWorker(std::string argv) {
 	return new WorkerReplace(argv);
 }
 
-Worker* WorkerDumpFactory::createWorker(std::string argv){
+Worker* WorkerDumpFactory::createWorker(std::string argv) {
 	return new WorkerDump(argv);
 }
 
-Worker* makeWorker(WorkerFactory* factory, std::string& argv){
+Worker* makeWorker(WorkerFactory* factory, std::string& argv) {
 	return factory->createWorker(argv);
 }
