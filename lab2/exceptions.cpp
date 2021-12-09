@@ -1,58 +1,57 @@
 #include "exceptions.h"
-#include <string>
 
-TooMushArgs::TooMushArgs(const std::string& message){
+TooMushArgs::TooMushArgs(const std::string& message) {
 	meserr = "Too mush args for " + message + '\n';
 }
 
-const char* TooMushArgs::what(){
+const char* TooMushArgs::what() const noexcept {
 	return meserr.c_str();
 }
 
-TooFewArgs::TooFewArgs(const std::string& message){
+TooFewArgs::TooFewArgs(const std::string& message) {
 	meserr = "Too few args for " + message + '\n';
 }
 
-const char* TooFewArgs::what(){
+const char* TooFewArgs::what() const noexcept {
 	return meserr.c_str();
 }
 
-FileBeginningError::FileBeginningError(){
+FileBeginningError::FileBeginningError() {
 	meserr = "File must start with desc!\n";
 }
 
-const char* FileBeginningError::what(){
+const char* FileBeginningError::what() const noexcept{
 	return meserr.c_str();
 }
 
-UnknownWorker::UnknownWorker(){
+UnknownWorker::UnknownWorker() {
 	meserr = "Discover unknown worker\n";
 }
 
-const char* UnknownWorker::what(){
+const char* UnknownWorker::what() const noexcept {
 	return meserr.c_str();
 }
 
-DelimiterError::DelimiterError(){
+DelimiterError::DelimiterError() {
 	meserr = "Delimiter must be csed\n";
 }
 
-const char* DelimiterError::what(){
+const char* DelimiterError::what() const noexcept {
 	return meserr.c_str();
 }
 
-DescriptionBlockError::DescriptionBlockError(){
+DescriptionBlockError::DescriptionBlockError() {
 	meserr = "Block description error\n";
 }
 
-const char* DescriptionBlockError::what(){
+const char* DescriptionBlockError::what() const noexcept {
 	return meserr.c_str();
 }
 
-DescriptionSequenceError::DescriptionSequenceError(){
+DescriptionSequenceError::DescriptionSequenceError() {
 	meserr = "Sequence description error\n";
 }
 
-const char* DescriptionSequenceError::what(){
+const char* DescriptionSequenceError::what() const noexcept {
 	return meserr.c_str();
 }
