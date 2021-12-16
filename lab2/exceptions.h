@@ -18,6 +18,14 @@ public:
 	const char* what() const noexcept override;
 };
 
+class FileOpenError : public std::exception {
+private:
+	std::string meserr;
+public:
+	FileOpenError();
+	const char* what() const noexcept override;
+};
+
 class FileBeginningError : public std::exception {
 private:
 	std::string meserr;
@@ -54,6 +62,6 @@ class DescriptionSequenceError : public std::exception {
 private:
 	std::string meserr;
 public:
-	DescriptionSequenceError();
+	DescriptionSequenceError(const std::string& msg);
 	const char* what() const noexcept override;
 };
