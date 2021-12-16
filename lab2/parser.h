@@ -31,7 +31,7 @@ private:
     std::vector<int> parseSequence(const std::string& buffer);
 
 public:
-    Parser(const std::string& filename);
+    Parser(const char* filename);
     void parse();
 
     std::vector<int> getSequence();
