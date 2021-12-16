@@ -16,6 +16,14 @@ const char* TooFewArgs::what() const noexcept {
 	return meserr.c_str();
 }
 
+FileOpenError::FileOpenError() {
+	meserr = "File is not opened.\n";
+}
+
+const char* FileOpenError::what() const noexcept {
+	return meserr.c_str();
+}
+
 FileBeginningError::FileBeginningError() {
 	meserr = "File must start with desc!\n";
 }
@@ -48,8 +56,8 @@ const char* DescriptionBlockError::what() const noexcept {
 	return meserr.c_str();
 }
 
-DescriptionSequenceError::DescriptionSequenceError() {
-	meserr = "Sequence description error\n";
+DescriptionSequenceError::DescriptionSequenceError(const std::string& msg) {
+	meserr = "Sequence description error" + msg + "\n";
 }
 
 const char* DescriptionSequenceError::what() const noexcept {
