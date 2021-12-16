@@ -6,9 +6,8 @@
 
 int main(int argc, char** argv) {
 	std::vector<std::string> text;
-	std::string file = "workflow.txt";
-	Parser p(file);
 	try {
+		Parser p("C:\\Users\\s.gudkov\\source\\repos\\lab2\\Debug\\workflow.txt");
 		p.parse();
 		auto sequence = p.getSequence();
 		auto workers = p.getBlocks();
