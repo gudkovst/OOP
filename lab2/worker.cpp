@@ -110,9 +110,12 @@ WorkerReplace::WorkerReplace(const std::string& argv) {
 }
 
 void WorkerReplace::execute(std::vector<std::string>& text) {
+	std::vector<std::string> new_text;
 	std::regex reg(word1);
 	for (auto& str : text)
-		std::regex_replace(str, reg, word2);
+		new_text.push_back(std::regex_replace(str, reg, word2));
+	text.clear();
+	text = new_text;
 }
 
 WorkerDump::WorkerDump(const std::string& argv) {
