@@ -69,15 +69,14 @@ WorkerGrep::WorkerGrep(const std::string& argv) : Worker() {
 }
 
 void WorkerGrep::execute(std::vector<std::string>& text) {
-	std::vector<std::string> res;
+	std::vector<std::string> new_text;
 	std::regex reg(word);
 	std::smatch suit_str;
 	for (auto const& str : text)
 		if (std::regex_search(str, suit_str, reg))
-			for (auto& word : suit_str)
-				res.push_back(word);
+			new_text.push_back(str);
 	text.clear();
-	text = res;
+	text = new_text;
 }
 
 WorkerSort::WorkerSort(const std::string& argv) {
