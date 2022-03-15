@@ -6,25 +6,25 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-public class Parser {
+class Parser {
     private ArrayList<Entry<String, Integer>> vocabl;
     private int numWords;
     private final String inputFile;
     private final String outFile;
 
-    public Parser(String filename){
+    Parser(String filename){
         inputFile = filename;
         outFile = "out.csv";
         numWords = 0;
     }
 
-    public Parser(String fileIn, String fileOut){
+    Parser(String fileIn, String fileOut){
         inputFile = fileIn;
         outFile = fileOut;
         numWords = 0;
     }
 
-    public void parse() throws IOException {
+    void parse() throws IOException {
         FileReader reader = new FileReader(inputFile);
         HashMap<String, Integer> collect = new HashMap<>();
         char[] cbuf = new char[1000];
@@ -46,7 +46,7 @@ public class Parser {
         reader.close();
     }
 
-    public void printing() throws IOException{
+    void printing() throws IOException{
         FileWriter writer = new FileWriter(outFile);
         for (Entry<String, Integer> record : vocabl){
             writer.write(record.getKey() + ", ");
