@@ -1,0 +1,9 @@
+DEFINE fun 2
+DEFINE xc 7
+PUSH fun
+PUSH xc
++
+# comment
+SQRT
+PRINT
+POP

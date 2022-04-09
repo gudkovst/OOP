@@ -1,0 +1,10 @@
+DEFINE a 5
+# comment
+
+PUSH a
+PUSH 16
+
+SQRT
+
++
+PRINT
