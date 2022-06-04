@@ -22,8 +22,6 @@ public class Main {
         Controller controller = new Controller(accessoryStorage, autoStorage, bodyStorage, motorStorage);
         View view = new View(controller);
         javax.swing.SwingUtilities.invokeLater(view);
-
-
         threadsPool.interruptThreads();
     }
 }
